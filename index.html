@@ -172,6 +172,32 @@
     </div>
 
     <script>
+        // Function to generate a random 33-character string
+        function generateRandomString() {
+            const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!$%#";
+            let result = "";
+            for (let i = 0; i < 33; i++) {
+                result += chars[Math.floor(Math.random() * chars.length)];
+            }
+            return result;
+        }
+
+        // Set the cookie with the ASCII art and random string
+        document.cookie = "warning=" + encodeURIComponent(`
+███████ ████████  ███████  ██████     ██
+██         ██     ██   ██  ██   ██    ██
+███████    ██     ██   ██  ██████     ██
+     ██    ██     ██   ██  ██
+███████    ██     ███████  ██         ██
+SHARING THIS SPECIAL STRING OF CHARACTERS WILL RESULT IN YOUR SESSION BEING HACKED.
+DO NOT SHARE THIS STRING WITH ANYONE!
+PLEASE DO NOT EVEN TOUCH THIS COOKIE.
+ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
+
+  
+${generateRandomString()}
+`);
+
         // Function to set a cookie with an expiration date
         function setCookie(name, value, days) {
             const d = new Date();
@@ -196,45 +222,8 @@
             return "";
         }
 
-        //Cookie for sessions
-        function generateRandomString() {
-    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!$%#";
-    let result = "";
-    for (let i = 0; i < 33; i++) {
-        result += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return result;
-}
-
-document.cookie = "warning=" + encodeURIComponent(`
-███████ ████████  ███████  ██████     ██
-██         ██     ██   ██  ██   ██    ██
-███████    ██     ██   ██  ██████     ██
-     ██    ██     ██   ██  ██
-███████    ██     ███████  ██         ██
-SHARING THIS SPECIAL STRING OF CHARACTERS WILL RESULT IN YOUR SESSION BEING HACKED.
-DO NOT SHARE THIS STRING WITH ANYONE!
-PLEASE DO NOT EVEN TOUCH THIS COOKIE.
-ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
-
-  
-${generateRandomString()}
-`);
-
-function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (const cookie of cookies) {
-        const [key, value] = cookie.split("=");
-        if (key === name) {
-            return decodeURIComponent(value);
-        }
-    }
-    return null;
-}
-
-// Example usage:
-console.log(getCookie("warning"));
-
+        // Example usage to check the cookie
+        console.log(getCookie("warning"));
 
         // Check if cookies have been accepted
         if (getCookie("cookiesAccepted") !== "") {
@@ -263,5 +252,7 @@ console.log(getCookie("warning"));
 
         document.addEventListener("DOMContentLoaded", function() {
             console.log("ODBIT website loaded.");
+        });
+    </script>
 </body>
 </html>
