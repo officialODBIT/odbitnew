@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ODBIT - Official Website</title>
+    <title>Welcome to odbit.org -- ODBIT</title>
     <style>
         * {
             margin: 0;
@@ -19,8 +19,8 @@
         .banner {
             background-color: black;
             color: white;
-            text-align: center;
-            padding: 10px 0;
+            text-align: left;
+            padding: 10px 20px;
             font-size: 14px;
         }
 
@@ -34,8 +34,8 @@
             background: url('world-map.jpg') no-repeat center center;
             background-size: cover;
             height: 200px;
-            justify-content: center;
             padding: 20px;
+            justify-content: flex-start; /* Align banner content to the left */
         }
 
         .logo {
@@ -82,6 +82,58 @@
         .content-box a:hover {
             text-decoration: underline;
         }
+
+        /* Bottom Banner */
+        .bottom-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bottom-banner img {
+            width: 60px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .bottom-banner .text {
+            font-size: 20px;
+            flex: 1;
+        }
+
+        .bottom-banner .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .bottom-banner button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .bottom-banner button:hover {
+            background-color: #2980b9;
+        }
+
+        .bottom-banner .dont-show-again {
+            font-size: 12px;
+            color: #95a5a6;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -106,8 +158,69 @@
         </div>
     </div>
 
+    <!-- Bottom Banner with Image and Buttons -->
+    <div class="bottom-banner" id="cookie-banner">
+        <img src="cookie-image.png" alt="Scout's Cookies">
+        <div class="text">
+            <p>Will you accept Scout's cookies?</p>
+        </div>
+        <div class="buttons">
+            <button id="accept">Yummy! Of course!</button>
+            <button id="decline">Only the ones I need.</button>
+        </div>
+        <span class="dont-show-again" id="dont-show-again">Don't show again</span>
+    </div>
+
     <script>
-        // You can add more interactivity here if needed
+        // Function to set a cookie with an expiration date
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Function to get a cookie value by name
+        function getCookie(name) {
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        // Check if cookies have been accepted
+        if (getCookie("cookiesAccepted") !== "") {
+            document.getElementById("cookie-banner").style.display = "none";
+        }
+
+        // Accept all cookies (100 years)
+        document.getElementById('accept').addEventListener('click', function() {
+            setCookie("cookiesAccepted", "true", 36500); // 100 years
+            document.getElementById("cookie-banner").style.display = "none";
+            alert('Thank you for accepting all cookies!');
+        });
+
+        // Only accept necessary cookies (1 week)
+        document.getElementById('decline').addEventListener('click', function() {
+            setCookie("cookiesAccepted", "false", 7); // 1 week
+            document.getElementById("cookie-banner").style.display = "none";
+            alert('Only necessary cookies accepted!');
+        });
+
+        // Don't show again
+        document.getElementById('dont-show-again').addEventListener('click', function() {
+            setCookie("cookiesAccepted", "false", 365); // 1 year
+            document.getElementById("cookie-banner").style.display = "none";
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             console.log("ODBIT website loaded.");
         });
