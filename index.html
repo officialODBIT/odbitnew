@@ -210,19 +210,20 @@
 
         // Only accept necessary cookies (1 week)
         document.getElementById('decline').addEventListener('click', function() {
-            setCookie("cookiesAccepted", "false", 7); // 1 week
+            setCookie("cookiesAccepted", "false", 1); // 1 week
             document.getElementById("cookie-banner").style.display = "none";
             alert('Only necessary cookies accepted!');
         });
 
         // Don't show again
         document.getElementById('dont-show-again').addEventListener('click', function() {
-            setCookie("cookiesAccepted", "false", 365); // 1 year
+            setCookie("cookiesAccepted", "false", 36525); // 1 year
             document.getElementById("cookie-banner").style.display = "none";
         });
 
         document.addEventListener("DOMContentLoaded", function() {
             console.log("ODBIT website loaded.");
+            alert('Webpage loaded!')
         });
     </script>
 </body>
