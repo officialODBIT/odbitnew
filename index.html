@@ -134,6 +134,19 @@
             color: #95a5a6;
             cursor: pointer;
         }
+
+        /* Add some styling for displaying the cookie content */
+        .cookie-content {
+            background-color: #fff;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 900px;
+            font-family: monospace;
+            white-space: pre-wrap;  /* Ensure newlines are displayed */
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -158,6 +171,11 @@
         </div>
     </div>
 
+    <!-- Cookie Content Display Section -->
+    <div class="cookie-content" id="cookie-content">
+        <!-- The warning cookie content will be inserted here dynamically -->
+    </div>
+
     <!-- Bottom Banner with Image and Buttons -->
     <div class="bottom-banner" id="cookie-banner">
         <img src="https://i.imgur.com/SN3B3VB.png" alt="Scout's Cookies">
@@ -172,7 +190,7 @@
     </div>
 
     <script>
-        // Function to generate a random 33-character string
+        // Function to generate a random string of 33 characters
         function generateRandomString() {
             const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!$%#";
             let result = "";
@@ -182,7 +200,7 @@
             return result;
         }
 
-        // Set the cookie with the ASCII art and random string
+        // Set the cookie with warning message and random string
         document.cookie = "warning=" + encodeURIComponent(`
 ███████ ████████  ███████  ██████     ██
 ██         ██     ██   ██  ██   ██    ██
@@ -198,6 +216,24 @@ ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
 ${generateRandomString()}
 `);
 
+        // Function to get a cookie by name
+        function getCookie(name) {
+            const cookies = document.cookie.split("; ");
+            for (const cookie of cookies) {
+                const [key, value] = cookie.split("=");
+                if (key === name) {
+                    return decodeURIComponent(value);
+                }
+            }
+            return null;
+        }
+
+        // Display the cookie content in the "cookie-content" section
+        const warningCookie = getCookie("warning");
+        if (warningCookie) {
+            document.getElementById("cookie-content").textContent = warningCookie;
+        }
+
         // Function to set a cookie with an expiration date
         function setCookie(name, value, days) {
             const d = new Date();
@@ -205,25 +241,6 @@ ${generateRandomString()}
             let expires = "expires=" + d.toUTCString();
             document.cookie = name + "=" + value + ";" + expires + ";path=/";
         }
-
-        // Function to get a cookie value by name
-        function getCookie(name) {
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-
-        // Example usage to check the cookie
-        console.log(getCookie("warning"));
 
         // Check if cookies have been accepted
         if (getCookie("cookiesAccepted") !== "") {
