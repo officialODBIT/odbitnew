@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+        console.warn('Webpage has started loading | Line 4')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -266,9 +268,11 @@ ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
             document.getElementById("cookie-banner").style.display = "none";
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
-            console.log("loaded");
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("loaded");
+        const loadTime = performance.now();
+        console.log(`Page loaded in ${loadTime.toFixed(3)} ms`);
+    });
     </script>
 </body>
 </html>
