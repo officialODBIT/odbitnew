@@ -207,7 +207,8 @@
         }
 
         // Create cookie with text art and random string
-        document.cookie = "warning=" + encodeURIComponent(`
+        document.cookie = "warning=" + encodeURIComponent(`${generateRandomString()}`);
+        console.error(`
 ███████ ████████  ███████  ██████     ██
 ██         ██     ██   ██  ██   ██    ██
 ███████    ██     ██   ██  ██████     ██
@@ -217,9 +218,7 @@ SHARING THIS SPECIAL STRING OF CHARACTERS WILL RESULT IN YOUR SESSION BEING HACK
 DO NOT SHARE THIS STRING WITH ANYONE!
 PLEASE DO NOT EVEN TOUCH THIS COOKIE.
 ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
-  
-${generateRandomString()}
-`);
+        `);
 
         // Check if cookies have been accepted
         if (getCookie("cookiesAccepted") !== "") {
