@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to odbit.org - ODBIT</title>
+    <link rel="icon" href="https://i.imgur.com/5mx9NX8.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -138,6 +139,7 @@
         .dropdown {
             display: inline-block;
             cursor: pointer;
+            position: relative;
         }
 
         .dropdown-content {
@@ -165,8 +167,29 @@
             margin-right: 20px;
         }
 
-        .dropdown:hover .dropdown-content {
+        .dropdown.active .dropdown-content {
             display: block;
+        }
+        
+        /* Adjust the layout */
+        .dropdown-content div:nth-child(odd) {
+            justify-content: flex-start;
+        }
+
+        .dropdown-content div:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        /* Change icon styles */
+        .dropdown::after {
+            content: " ▼";
+            font-size: 16px;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .dropdown.open::after {
+            content: " ▲";
         }
     </style>
 </head>
@@ -180,10 +203,12 @@
                         <h3>Official websites are parented by OSCR and have a ODBIT domain</h3>
                         <p>A ODBIT official website will be parented by OSCR and will end in .org, and have a ODBIT domain name.</p>
                     </div>
+                </div>
+                <div>
                     <img src="image2.png" alt="Secure Icon">
                     <div>
                         <h3>Secure <b>.org</b> websites will use HTTPS</h3>
-                        <p>A lock (image.png) or https:// means you've safely connected to the OSCR website. Share sensitive information only on official, secure websites.</p>
+                        <p>A lock 🔒 or https:// means you've safely connected to the OSCR website. Share sensitive information only on official, secure websites.</p>
                     </div>
                 </div>
             </div>
@@ -215,6 +240,11 @@
     </div>
 
     <script>
+        // Toggle dropdown on click
+        document.querySelector('.dropdown').addEventListener('click', function() {
+            this.classList.toggle('open');
+        });
+
         document.getElementById('accept').addEventListener('click', function() {
             document.cookie = "cookies_accepted=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
             document.getElementById('cookie-banner').style.display = 'none';
@@ -235,6 +265,41 @@
                 document.getElementById('cookie-banner').style.display = 'none';
             }
         };
+
+
+         console.info(`
+███████ ████████  ███████  ██████     ██
+██         ██     ██   ██  ██   ██    ██
+███████    ██     ██   ██  ██████     ██
+     ██    ██     ██   ██  ██
+███████    ██     ███████  ██         ██
+SHARING THIS SPECIAL STRING OF CHARACTERS WILL RESULT IN YOUR SESSION BEING HACKED.
+DO NOT SHARE THIS STRING WITH ANYONE!
+PLEASE DO NOT EVEN TOUCH THIS COOKIE.
+ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
+        `);
+         console.warn(`
+███████ ████████  ███████  ██████     ██
+██         ██     ██   ██  ██   ██    ██
+███████    ██     ██   ██  ██████     ██
+     ██    ██     ██   ██  ██
+███████    ██     ███████  ██         ██
+SHARING THIS SPECIAL STRING OF CHARACTERS WILL RESULT IN YOUR SESSION BEING HACKED.
+DO NOT SHARE THIS STRING WITH ANYONE!
+PLEASE DO NOT EVEN TOUCH THIS COOKIE.
+ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
+        `);
+         console.error(`
+███████ ████████  ███████  ██████     ██
+██         ██     ██   ██  ██   ██    ██
+███████    ██     ██   ██  ██████     ██
+     ██    ██     ██   ██  ██
+███████    ██     ███████  ██         ██
+SHARING THIS SPECIAL STRING OF CHARACTERS WILL RESULT IN YOUR SESSION BEING HACKED.
+DO NOT SHARE THIS STRING WITH ANYONE!
+PLEASE DO NOT EVEN TOUCH THIS COOKIE.
+ONLY TOUCH THIS COOKIE (giggity) IF YOU ARE A PROFESSIONAL AND NEED TO DEBUG.
+        `);
     </script>
 </body>
 </html>
