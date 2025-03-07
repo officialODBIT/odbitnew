@@ -241,32 +241,35 @@
     </div>
 
     <script>
-        // Function to toggle the dropdown
-        function toggleDropdown() {
-            var dropdown = document.querySelector('.dropdown');
-            dropdown.classList.toggle('open');
-        }
+// Function to toggle the dropdown
+function toggleDropdown() {
+    var dropdown = document.querySelector('.dropdown');
+    dropdown.classList.toggle('open');
+}
 
-        document.getElementById('accept').addEventListener('click', function() {
-            document.cookie = "cookies_accepted=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-            document.getElementById('cookie-banner').style.display = 'none';
-        });
+// Cookie banner logic
+document.getElementById('accept').addEventListener('click', function() {
+    document.cookie = "cookies_accepted=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    document.getElementById('cookie-banner').style.display = 'none';
+});
 
-        document.getElementById('decline').addEventListener('click', function() {
-            document.cookie = "cookies_accepted=necessary; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-            document.getElementById('cookie-banner').style.display = 'none';
-        });
+document.getElementById('decline').addEventListener('click', function() {
+    document.cookie = "cookies_accepted=necessary; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    document.getElementById('cookie-banner').style.display = 'none';
+});
 
-        document.getElementById('dont-show-again').addEventListener('click', function() {
-            document.cookie = "cookies_accepted=hidden; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-            document.getElementById('cookie-banner').style.display = 'none';
-        });
+document.getElementById('dont-show-again').addEventListener('click', function() {
+    document.cookie = "cookies_accepted=hidden; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    document.getElementById('cookie-banner').style.display = 'none';
+});
 
-        window.onload = function() {
-            if (document.cookie.includes("cookies_accepted")) {
-                document.getElementById('cookie-banner').style.display = 'none';
-            }
-        };
+// Check cookies on page load
+window.onload = function() {
+    if (document.cookie.includes("cookies_accepted")) {
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+};
+
     </script>
 </body>
 </html>
